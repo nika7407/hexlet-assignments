@@ -5,15 +5,15 @@ public class Point {
     private Integer x;
     private Integer y;
 
-    public Point(Integer x, Integer y){
+    public Point(Integer x, Integer y) {
         this.x = x;
         this.y = y;
     }
-    public Integer getX(){
+    public Integer getX() {
         return x;
     }
 
-    public Integer getY(){
+    public Integer getY() {
         return y;
     }
 }
