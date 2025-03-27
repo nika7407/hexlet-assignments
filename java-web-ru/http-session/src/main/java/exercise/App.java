@@ -22,9 +22,6 @@ public final class App {
             Integer per = idk.queryParamAsClass("per", Integer.class).getOrDefault(5);
 
             List<Map<String, String>> return_list = Data.getUsers();
-            return_list.sort((map1,map2) ->
-                Integer.compare(Integer.parseInt(map1.get("id")),Integer.parseInt(map2.get("id")))
-            );
 
             idk.json(return_list.subList(page*per-per,page*per));
         });
