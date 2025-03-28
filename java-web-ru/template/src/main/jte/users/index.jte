@@ -14,7 +14,7 @@
 <ul>
     @for (var user : users.getUsers())
       <li>
-        <a href="/users/${user.getId()}">${user.getFirstName()}</a>
+        <a href="/users/${user.getId()}">${user.getFirstName()} ${user.getLastName()}</a>
       </li>
     @endfor
 </ul>
