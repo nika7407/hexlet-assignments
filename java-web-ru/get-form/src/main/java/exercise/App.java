@@ -28,23 +28,17 @@ public final class App {
             var term = ctx.queryParam("term");
             List<User> return_list = new ArrayList<>();
 
-            if (term != null && !term.trim().isEmpty()) {
-                String trimmedTerm = term.trim().toLowerCase();
-                char firstLetter = trimmedTerm.charAt(0); // Get first character
-
-                for (int i = 0; i < USERS.size(); i++) {
-                    User user = USERS.get(i);
-                    String firstName = user.getFirstName().toLowerCase();
-
-                    // Check if first name starts with the letter
-                    if (!firstName.isEmpty() && firstName.charAt(0) == firstLetter) {
-                        return_list.add(user);
+            if (term != null){
+                term.toLowerCase();
+                for (int i = 0; i < USERS.size(); i++){
+                    if (USERS.get(i).getFirstName().toLowerCase().startsWith(term)){
+                        return_list.add(USERS.get(i));
                     }
                 }
-            } else {
-                return_list = new ArrayList<>(USERS);
             }
-
+            else {
+                return_list = USERS;
+            }
             UsersPage idk = new UsersPage(return_list,term);
             ctx.render("users/index.jte", model("term",idk));
         });
