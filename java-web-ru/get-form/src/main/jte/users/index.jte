@@ -6,12 +6,11 @@
         <input type="submit" value="Search" />
     </form>
 
-
+    <ul>
     @for (var user : term.getUsers())
-       <ul> <li>
+        <li>
             ${user.getFirstName()} ${user.getLastName()}
-               id = ${user.getId()}
-               email = ${user.getEmail()}
-        </li> </ul>
+        </li>
     @endfor
+    </ul>
 `)
