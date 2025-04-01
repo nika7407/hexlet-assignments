@@ -38,7 +38,8 @@ public final class App {
            ctx.render("articles/build.jte", model("page",idk) );
         });
 
-        app.post("/articles/build", ctx -> {
+        app.post("/articles", ctx -> {
+            ctx.redirect("/articles/build");
             String rawTitle = ctx.formParam("title");
             String rawContent = ctx.formParam("content");
             try {
