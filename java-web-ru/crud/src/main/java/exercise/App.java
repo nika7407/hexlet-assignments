@@ -1,0 +1,36 @@
+package exercise;
+
+import exercise.repository.PostRepository;
+import io.javalin.Javalin;
+import exercise.controller.PostsController;
+import exercise.controller.RootController;
+import exercise.util.NamedRoutes;
+import io.javalin.rendering.template.JavalinJte;
+
+public final class App {
+
+    public static Javalin getApp() {
+
+        var app = Javalin.create(config -> {
+            config.bundledPlugins.enableDevLogging();
+            config.fileRenderer(new JavalinJte());
+        });
+
+        // BEGIN
+        app.get(NamedRoutes.rootPath(),ctx ->{
+           ctx.render("index.jte");
+        });
+        app.get(NamedRoutes.postsPath(), PostsController::index);
+
+        app.get(NamedRoutes.postPath("{id}"), PostsController::show);
+        // END
+
+        return app;
+    }
+
+    public static void main(String[] args) {
+        Javalin app = getApp();
+        app.start(7070);
+        System.out.println(PostRepository.getEntities());
+    }
+}
