@@ -13,7 +13,7 @@
         </ul>
     @endif
 
-    <form value = "/articles" method="post">
+    <form action="/articles" method="post">
     <div>
         <label>
             <input type ="text" name="title" value="${page.getTitle()}"/>

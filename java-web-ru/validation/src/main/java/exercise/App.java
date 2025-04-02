@@ -34,12 +34,11 @@ public final class App {
         app.get("/articles/build", ctx -> {
             String title = "empty";
             String content = "empty";
-            var idk = new BuildArticlePage (title,content);
-           ctx.render("articles/build.jte", model("page",idk) );
+            var idk = new BuildArticlePage (title,content,null);
+           ctx.render("articles/build.jte", model("page", idk));
         });
 
         app.post("/articles", ctx -> {
-            ctx.redirect("/articles/build");
             String rawTitle = ctx.formParam("title");
             String rawContent = ctx.formParam("content");
             try {
@@ -58,6 +57,7 @@ public final class App {
                         rawContent != null ? rawContent : "",
                         e.getErrors()
                 );
+                ctx.status(422);
                 ctx.render("articles/build.jte", model("page", page));
             }
         });

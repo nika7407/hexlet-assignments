@@ -18,14 +18,6 @@ public class BuildArticlePage {
     private String content;
     private Map<String, List<ValidationError<Object>>> errors;
 
-    public BuildArticlePage (Map<String, List<ValidationError<Object>>> errors){
-        this.errors = errors;
-    }
-
-    public BuildArticlePage (String title, String content){
-        this.title = title;
-        this.content = content;
-    }
 
 }
 // END
