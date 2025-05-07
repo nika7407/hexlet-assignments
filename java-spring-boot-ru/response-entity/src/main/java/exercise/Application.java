@@ -54,8 +54,9 @@ public class Application {
     @PostMapping("/posts")
     public ResponseEntity<Post> add(@RequestBody Post postToAdd) {
         posts.add(postToAdd);
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(201).body(postToAdd);
     }
+
     // PUT /posts/{id} – Обновление поста. Должен возвращаться статус 200.
     // Если пост не существует, то должен возвращаться 404
 
@@ -69,7 +70,7 @@ public class Application {
             postt.setId(post.getId());
             postt.setBody(post.getBody());
             postt.setTitle(post.getTitle());
-            return  ResponseEntity.status(200).build();
+            return  ResponseEntity.ok(postt);
         }
         //else
         return  ResponseEntity.status(404).build();
