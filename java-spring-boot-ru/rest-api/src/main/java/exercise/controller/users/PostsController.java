@@ -44,7 +44,7 @@ public class PostsController{
     // Обратите внимание, что userId берется из маршрута
 
     @PostMapping("/users/{id}/posts")
-    public ResponseEntity<Post> addPost(@PathVariable int id, @RequestParam Post postToAdd){
+    public ResponseEntity<Post> addPost(@PathVariable int id, @RequestBody Post postToAdd){
 
         postToAdd.setUserId(id);
         posts.add(postToAdd);
