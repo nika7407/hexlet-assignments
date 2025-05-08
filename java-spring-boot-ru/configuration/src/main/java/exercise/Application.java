@@ -39,10 +39,13 @@ public class Application {
     }
 
 
+    @Autowired
+    private UserProperties usersInfo;
+
     @GetMapping("/admins")
     public List<String> getAdmins() {
 
-        List<String> adminEmails = new DefaultUserProperties().getNames();
+        List<String> adminEmails = usersInfo.getAdmins();
 
         return users.stream()
                 .filter(u -> adminEmails.contains(u.getEmail()))
