@@ -2,6 +2,7 @@ package exercise;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -39,8 +40,16 @@ public class Application {
 
 
     @GetMapping("/admins")
-    public List<String> getAdmins(){
-       return  new DefaultUserProperties().getNames();
+    public List<String> getAdmins() {
+
+        List<String> adminEmails = new DefaultUserProperties().getNames();
+
+        return users.stream()
+                .filter(u -> adminEmails.contains(u.getEmail()))
+                .map(u -> u.getName())
+                .sorted()
+                .toList();
+
     }
     // END
 
