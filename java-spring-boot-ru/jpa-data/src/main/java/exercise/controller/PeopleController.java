@@ -30,29 +30,29 @@ public class PeopleController {
     }
 
     // BEGIN
-    @GetMapping("/People")
+    @GetMapping("")
+    @ResponseStatus(HttpStatus.OK)
     public List<Person>  getPeople(){
          return personRepository.findAll();
     }
 
-    // POST /people – создание новой персоны.
-    // При успешном действии должен вернуться ответ со статусом 201 Created
+    // POST /people вЂ“ СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕР№ РїРµСЂСЃРѕРЅС‹.
+    // РџСЂРё СѓСЃРїРµС€РЅРѕРј РґРµР№СЃС‚РІРёРё РґРѕР»Р¶РµРЅ РІРµСЂРЅСѓС‚СЊСЃСЏ РѕС‚РІРµС‚ СЃРѕ СЃС‚Р°С‚СѓСЃРѕРј 201 Created
 
-    @PostMapping("/People")
+    @PostMapping("")
     public ResponseEntity<Person> addPeople(@RequestBody Person personToAdd){
         personRepository.save(personToAdd);
         return ResponseEntity.status(201)
                 .body(personToAdd);
     }
 
-   //  DELETE /people/{id} – удаление персоны.
-   // При успешном действии должен вернуться ответ со статусом 204 No Content
+   //  DELETE /people/{id} вЂ“ СѓРґР°Р»РµРЅРёРµ РїРµСЂСЃРѕРЅС‹.
+   // РџСЂРё СѓСЃРїРµС€РЅРѕРј РґРµР№СЃС‚РІРёРё РґРѕР»Р¶РµРЅ РІРµСЂРЅСѓС‚СЊСЃСЏ РѕС‚РІРµС‚ СЃРѕ СЃС‚Р°С‚СѓСЃРѕРј 204 No Content
 
-    @DeleteMapping("/people/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePerson(@PathVariable Long id){
         personRepository.deleteById(id);
-
     }
 
     // END

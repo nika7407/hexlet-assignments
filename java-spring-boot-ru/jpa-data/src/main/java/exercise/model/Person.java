@@ -1,31 +1,31 @@
 package exercise.model;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import static jakarta.persistence.GenerationType.IDENTITY;
 import lombok.Getter;
 import lombok.Setter;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 // BEGIN
 
 @Getter
 @Setter
 @Entity
-@Table( name = "person")
+@Table(name = "person")
 public class Person{
 
-    // Создайте модель Person со свойствами, которая будет представлять человека в нашем
-    // приложении. У человека есть уникальный идентификатор, имя firstName и фамилия lastName.
-    // Идентификатор должен генерироваться автоматически.
+    // РЎРѕР·РґР°Р№С‚Рµ РјРѕРґРµР»СЊ Person СЃРѕ СЃРІРѕР№СЃС‚РІР°РјРё, РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РїСЂРµРґСЃС‚Р°РІР»СЏС‚СЊ С‡РµР»РѕРІРµРєР° РІ РЅР°С€РµРј
+    // РїСЂРёР»РѕР¶РµРЅРёРё. РЈ С‡РµР»РѕРІРµРєР° РµСЃС‚СЊ СѓРЅРёРєР°Р»СЊРЅС‹Р№ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ, РёРјСЏ firstName Рё С„Р°РјРёР»РёСЏ lastName.
+    // РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РґРѕР»Р¶РµРЅ РіРµРЅРµСЂРёСЂРѕРІР°С‚СЊСЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё.
 @Id
-@GeneratedValue(strategy = IDENTITY)
-private int id;
-@Column
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
 private String firstName;
-@Column
 private String lastName;
 
 }
