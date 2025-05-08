@@ -43,7 +43,7 @@ public class PostsController{
     // Код должен возвращать статус 201, тело запроса должно содержать slug, title и body.
     // Обратите внимание, что userId берется из маршрута
 
-    @GetMapping("/users/{id}/posts")
+    @PostMapping("/users/{id}/posts")
     public ResponseEntity<Post> addPost(@PathVariable int id, @RequestParam Post postToAdd){
 
         postToAdd.setUserId(id);
