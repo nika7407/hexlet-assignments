@@ -1,0 +1,19 @@
+---
+spring:
+  # BEGIN
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    show-sql: true # Показывать SQL-запросы в логах
+    hibernate:
+      ddl-auto: update # Автоматическое обновление схемы
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect # Диалект для H2
+  # END
+  output:
+    ansi:
+      enabled: always
