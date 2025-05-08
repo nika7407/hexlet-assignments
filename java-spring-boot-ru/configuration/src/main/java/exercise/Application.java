@@ -3,9 +3,12 @@ package exercise;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,11 +24,23 @@ public class Application {
     // Все пользователи
     private List<User> users = Data.getUsers();
 
+    private List<String> names;
+
     // BEGIN
+
+
+    @Component
+    @ConfigurationProperties(prefix = "users.admins") // Правильный префикс
+    @Getter
+    @Setter // Добавлен сеттер
+    public static class DefaultUserProperties {
+        private List<String> names;
+    }
+
+
     @GetMapping("/admins")
-    @ConfigurationProperties(prefix = "users.admins")
-    public List<String> adminList(){
-       return  adminList().stream().sorted().toList();
+    public List<String> getAdmins(){
+       return  new DefaultUserProperties().getNames();
     }
     // END
 
