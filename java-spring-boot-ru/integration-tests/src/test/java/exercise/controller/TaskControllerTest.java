@@ -50,6 +50,8 @@ class TaskControllerTest {
 
     @Test
     public void testIndex() throws Exception {
+        taskRepository.deleteById(1L);
+        taskRepository.deleteById(2L);
         var result = mockMvc.perform(get("/tasks"))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -62,6 +64,8 @@ class TaskControllerTest {
     // BEGIN
     @Test
     public void testOneTask() throws Exception {
+        taskRepository.deleteById(1L);
+        taskRepository.deleteById(2L);
         Task task = new Task();
         task.setId(1);
         task.setTitle("idk");
@@ -77,26 +81,31 @@ class TaskControllerTest {
         mockMvc.perform(get("/tasks/9999"))
                 .andExpect(status().is(404));
         taskRepository.deleteById(1L);
+        taskRepository.deleteById(2L);
 
     }
 
     @Test
     public void testAdd() throws Exception {
+        taskRepository.deleteById(1L);
+        taskRepository.deleteById(2L);
         Task task = new Task();
-        task.setId(1);
         task.setTitle("idk");
         var result = mockMvc.perform(post("/tasks")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(task)))
                 .andExpect(status().isCreated());
 
-        assertThat(taskRepository.findById(1L).get().getTitle()).isEqualTo("idk");
+        assertThat(taskRepository.findByTitle("idk")).isPresent().isNotEmpty();
         taskRepository.deleteById(1L);
+        taskRepository.deleteById(2L);
 
     }
 
     @Test
     public void testUpdate() throws Exception {
+        taskRepository.deleteById(1L);
+        taskRepository.deleteById(2L);
         Task task = new Task();
         task.setId(1);
         task.setTitle("idk");
@@ -110,13 +119,16 @@ class TaskControllerTest {
                 .andExpect(status().isOk());
 
 
-        assertThat(taskRepository.findById(1L).get().getTitle()).isEqualTo("not Idk");
+        assertThat(taskRepository.findByTitle("not Idk")).isPresent().isNotEmpty();
         taskRepository.deleteById(1L);
+        taskRepository.deleteById(2L);
 
     }
 
 @Test
     public void testDelete() throws Exception {
+    taskRepository.deleteById(1L);
+    taskRepository.deleteById(2L);
     Task task = new Task();
     task.setId(1);
     task.setTitle("idk");
@@ -124,6 +136,9 @@ class TaskControllerTest {
     mockMvc.perform(delete("/tasks/" + task.getId()))
             .andExpect(status().is(200));
     assertThat(taskRepository.findById(1L)).isEmpty();
+    taskRepository.deleteById(1L);
+    taskRepository.deleteById(2L);
+
 }
     // END
 }
