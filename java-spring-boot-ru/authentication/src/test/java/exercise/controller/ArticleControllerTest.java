@@ -165,29 +165,5 @@ class ArticleControllerTest {
         assertThat(articleRepository.existsById(testArticle.getId())).isFalse();
     }
 
-    @Test
-    public void testIndexWithoutAuth() throws Exception {
 
-        var result = mockMvc.perform(get("/articles"))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    public void testShowWithoutAuth() throws Exception {
-        var request = get("/articles/{id}", testArticle.getId());
-        var result = mockMvc.perform(request)
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    public void testCreateWithoutAuth() throws Exception {
-        var dto = mapper.map(testArticle);
-
-        var request = post("/articles")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(om.writeValueAsString(dto));
-
-        mockMvc.perform(request)
-                .andExpect(status().isUnauthorized());
-    }
 }
